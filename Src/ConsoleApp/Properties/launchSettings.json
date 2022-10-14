@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DiagnosticsMonitor.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--monitorType azailogs_slot_role_cpu --sourceTakeLimit 0  --sourcePreviousSpanMinutes 60 --durationToRunMinutes 5 --pollingIntervalMilliseconds 60000 --primaryThresholdValue 50 --sourceConnection 30lahbrlgyz6s55oauml7nnpmtejhl4ujc4bbbzo --terminateWhenConditionMet true --sourceAppOrResourceId 243cac84-7fa4-46eb-9d69-a9ab640e38c8 --shouldFailOnRunDurationExceeded false --sourceFilter \"performanceCounters | where counter endswith \\\"Processor Time Normalized\\\" | extend deploymentId = tostring(customDimensions.DeploymentId) | where deploymentId == \\\"01f149c4ed5e447b85df63e879ae35ce\\\" | summarize max(value) by bin(timestamp, 2h), cloud_RoleInstance, deploymentId\""
+    }
+  }
+}
