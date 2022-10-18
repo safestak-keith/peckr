@@ -1,7 +1,7 @@
 ﻿using System;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 
-namespace DiagnosticsMonitor.Tests.Core.Generators
+namespace Peckr.Tests.Core.Generators
 {
     public static class MonitorSettingsGenerator
     {

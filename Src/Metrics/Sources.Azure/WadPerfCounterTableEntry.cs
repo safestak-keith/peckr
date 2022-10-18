@@ -1,6 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace DiagnosticsMonitor.Metrics.Sources.Azure
+namespace Peckr.Metrics.Sources.Azure
 {
     public class WadPerfCounterTableEntry : TableEntity
     {

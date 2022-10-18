@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using Microsoft.Extensions.Configuration;
-using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     internal class Program
     {

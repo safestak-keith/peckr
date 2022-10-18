@@ -1,5 +1,5 @@
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Tests.Core.Generators;
+using Peckr.Abstractions;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using Moq;
 using System;
@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace DiagnosticsMonitor.ConsoleApp.UnitTests
+namespace Peckr.ConsoleApp.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class PollingConsoleMonitorShould

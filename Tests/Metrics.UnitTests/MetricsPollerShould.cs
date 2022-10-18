@@ -1,6 +1,6 @@
-﻿using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Metrics.UnitTests.Generators;
-using DiagnosticsMonitor.Tests.Core.Generators;
+﻿using Peckr.Abstractions;
+using Peckr.Metrics.UnitTests.Generators;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using Moq;
 using System;
@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Tests.Core.Extensions;
+using Peckr.Tests.Core.Extensions;
 using Xunit;
 using Range = Moq.Range;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests
+namespace Peckr.Metrics.UnitTests
 {
     public class MetricsPollerShould
     {

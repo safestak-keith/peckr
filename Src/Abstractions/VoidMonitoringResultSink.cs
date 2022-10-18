@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {
     public class VoidMonitoringResultSink<T> : IMonitoringResultSink<T>
     {

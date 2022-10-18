@@ -1,4 +1,4 @@
-﻿namespace DiagnosticsMonitor.Metrics.Sources.Azure
+﻿namespace Peckr.Metrics.Sources.Azure
 {
     public static class WadPerfCountersTableEntryMapper
     {

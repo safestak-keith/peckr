@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Metrics;
+using Peckr.Abstractions;
+using Peckr.Metrics;
 
-namespace DiagnosticsMonitor.ConsoleApp.Sinks
+namespace Peckr.ConsoleApp.Sinks
 {
     public class MetricConsoleSink : IMonitoringResultSink<IReadOnlyCollection<Metric>>
     {

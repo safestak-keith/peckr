@@ -1,10 +1,10 @@
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace DiagnosticsMonitor.ConsoleApp.UnitTests
+namespace Peckr.ConsoleApp.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class MonitorConfigurationExtensionsShould

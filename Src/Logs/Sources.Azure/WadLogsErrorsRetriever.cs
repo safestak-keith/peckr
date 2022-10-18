@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Polly;
-using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Logs.Sources.Azure
+namespace Peckr.Logs.Sources.Azure
 {
     public class WadLogsErrorsRetriever : IMonitorDataRetriever<IReadOnlyCollection<LogEntry>>
     {

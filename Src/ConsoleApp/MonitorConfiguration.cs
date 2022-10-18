@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     public class MonitorConfiguration
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiagnosticsMonitor.Metrics
+namespace Peckr.Metrics
 {
     public enum AggregationType
     {

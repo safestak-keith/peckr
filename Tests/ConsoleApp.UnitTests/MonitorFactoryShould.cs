@@ -1,17 +1,17 @@
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.ConsoleApp.Sinks;
-using DiagnosticsMonitor.Logs;
-using DiagnosticsMonitor.Logs.Sinks.Slack;
-using DiagnosticsMonitor.Metrics;
-using DiagnosticsMonitor.Metrics.Sinks.Slack;
-using DiagnosticsMonitor.Tests.Core.Generators;
+using Peckr.Abstractions;
+using Peckr.ConsoleApp.Sinks;
+using Peckr.Logs;
+using Peckr.Logs.Sinks.Slack;
+using Peckr.Metrics;
+using Peckr.Metrics.Sinks.Slack;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
-namespace DiagnosticsMonitor.ConsoleApp.UnitTests
+namespace Peckr.ConsoleApp.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class MonitorFactoryShould

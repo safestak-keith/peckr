@@ -1,4 +1,4 @@
-﻿namespace DiagnosticsMonitor.Logs.Sources.Azure
+﻿namespace Peckr.Logs.Sources.Azure
 {
     public static class WadLogsTableEntryMapper
     {

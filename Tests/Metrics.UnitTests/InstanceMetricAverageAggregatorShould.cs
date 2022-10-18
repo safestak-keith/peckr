@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiagnosticsMonitor.Metrics.UnitTests.Generators;
+using Peckr.Metrics.UnitTests.Generators;
 using FluentAssertions;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests
+namespace Peckr.Metrics.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class InstanceMetricAverageAggregatorShould

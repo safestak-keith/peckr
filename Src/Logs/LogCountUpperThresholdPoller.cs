@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
+using Peckr.Abstractions;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Logs
+namespace Peckr.Logs
 {
     public class LogCountUpperThresholdPoller : IMonitoringResultPoller<IReadOnlyCollection<LogEntry>>
     {

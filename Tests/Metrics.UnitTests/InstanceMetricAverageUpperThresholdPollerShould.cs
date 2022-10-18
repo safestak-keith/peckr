@@ -4,14 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Metrics.UnitTests.Generators;
-using DiagnosticsMonitor.Tests.Core.Generators;
+using Peckr.Abstractions;
+using Peckr.Metrics.UnitTests.Generators;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests
+namespace Peckr.Metrics.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class InstanceMetricAverageUpperThresholdPollerShould

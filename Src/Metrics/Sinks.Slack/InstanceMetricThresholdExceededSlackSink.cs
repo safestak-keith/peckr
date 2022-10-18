@@ -6,12 +6,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using Polly;
 using Slack.Webhooks;
-using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Metrics.Sinks.Slack
+namespace Peckr.Metrics.Sinks.Slack
 {
     public class InstanceMetricThresholdExceededSlackSink : IMonitoringResultSink<IReadOnlyCollection<Metric>>
     {

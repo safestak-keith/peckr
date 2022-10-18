@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 
-namespace DiagnosticsMonitor.Metrics.ResultEvaluators
+namespace Peckr.Metrics.ResultEvaluators
 {
     public class MetricSingleUpperThresholdEvaluator : IMonitoringResultEvaluator<IReadOnlyCollection<Metric>>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {
     public enum MonitorType
     {

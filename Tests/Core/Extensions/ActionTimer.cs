@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace DiagnosticsMonitor.Tests.Core.Extensions
+namespace Peckr.Tests.Core.Extensions
 {
     public static class ActionTimer
     {

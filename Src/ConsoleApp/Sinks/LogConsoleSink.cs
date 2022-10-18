@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Logs;
+using Peckr.Abstractions;
+using Peckr.Logs;
 
-namespace DiagnosticsMonitor.ConsoleApp.Sinks
+namespace Peckr.ConsoleApp.Sinks
 {
     public class LogConsoleSink : IMonitoringResultSink<IReadOnlyCollection<LogEntry>>
     {

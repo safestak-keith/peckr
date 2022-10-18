@@ -5,10 +5,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
+using Peckr.Abstractions;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Metrics
+namespace Peckr.Metrics
 {
     public class InstanceMetricAverageUpperThresholdPoller : IMonitoringResultPoller<IReadOnlyCollection<Metric>>
     {

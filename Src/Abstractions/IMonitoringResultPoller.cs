@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {   
     public interface IMonitoringResultPoller<T>
     {

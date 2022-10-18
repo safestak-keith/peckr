@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {
     [EventSource(Name = "DiagnosticsMonitor-EventSource")]
     public sealed class PeckrEventSource : EventSource

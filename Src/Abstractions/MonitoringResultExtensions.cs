@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {
     public static class MonitoringResultExtensions
     {

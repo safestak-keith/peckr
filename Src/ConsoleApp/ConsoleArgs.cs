@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     public static class ConsoleArgs
     {

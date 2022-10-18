@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.ConsoleApp.Sinks;
-using DiagnosticsMonitor.Logs;
-using DiagnosticsMonitor.Logs.Sinks.Slack;
-using DiagnosticsMonitor.Logs.Sources.Azure;
-using DiagnosticsMonitor.Metrics;
-using DiagnosticsMonitor.Metrics.DataProcessors;
-using DiagnosticsMonitor.Metrics.ResultEvaluators;
-using DiagnosticsMonitor.Metrics.Sinks.Slack;
-using DiagnosticsMonitor.Metrics.Sources.Azure;
+using Peckr.Abstractions;
+using Peckr.ConsoleApp.Sinks;
+using Peckr.Logs;
+using Peckr.Logs.Sinks.Slack;
+using Peckr.Logs.Sources.Azure;
+using Peckr.Metrics;
+using Peckr.Metrics.DataProcessors;
+using Peckr.Metrics.ResultEvaluators;
+using Peckr.Metrics.Sinks.Slack;
+using Peckr.Metrics.Sources.Azure;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     /// <summary>
     /// Basic factory until increase in complexity requires a more sophisticated DI approach

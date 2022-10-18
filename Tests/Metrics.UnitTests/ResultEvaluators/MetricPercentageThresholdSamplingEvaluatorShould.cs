@@ -1,9 +1,9 @@
-﻿using DiagnosticsMonitor.Metrics.ResultEvaluators;
-using DiagnosticsMonitor.Metrics.UnitTests.Generators;
+﻿using Peckr.Metrics.ResultEvaluators;
+using Peckr.Metrics.UnitTests.Generators;
 using FluentAssertions;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests.ResultEvaluators
+namespace Peckr.Metrics.UnitTests.ResultEvaluators
 {
     public class MetricPercentageThresholdSamplingEvaluatorShould
     {

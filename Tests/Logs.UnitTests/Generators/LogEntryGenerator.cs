@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DiagnosticsMonitor.Logs.UnitTests.Generators
+namespace Peckr.Logs.UnitTests.Generators
 {
     public static class LogEntryGenerator
     {

@@ -1,4 +1,4 @@
-﻿using DiagnosticsMonitor.Abstractions;
+﻿using Peckr.Abstractions;
 using Polly;
 using Slack.Webhooks;
 using System;
@@ -9,9 +9,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Logs.Sinks.Slack
+namespace Peckr.Logs.Sinks.Slack
 {
     public class ErrorLogsSlackSink : IMonitoringResultSink<IReadOnlyCollection<LogEntry>>
     {

@@ -1,9 +1,9 @@
 using System;
-using DiagnosticsMonitor.Metrics.Sources.Azure;
+using Peckr.Metrics.Sources.Azure;
 using FluentAssertions;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests
+namespace Peckr.Metrics.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class WadPerfCountersTableEntryMapperShould

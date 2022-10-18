@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Text.Json;
-using DiagnosticsMonitor.Metrics.DataProcessors;
-using DiagnosticsMonitor.Metrics.Sources.Azure;
+using Peckr.Metrics.DataProcessors;
+using Peckr.Metrics.Sources.Azure;
 using FluentAssertions;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests.DataProcessors
+namespace Peckr.Metrics.UnitTests.DataProcessors
 {
     public class AppInsightsResponseTimeDataProcessorShould
     {
