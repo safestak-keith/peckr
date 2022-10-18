@@ -9,9 +9,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Abstractions\DiagnosticsMonitor.Abstractions.csproj" />
-		<ProjectReference Include="..\Logs\DiagnosticsMonitor.Logs.csproj" />
-		<ProjectReference Include="..\Metrics\DiagnosticsMonitor.Metrics.csproj" />
+		<ProjectReference Include="..\Abstractions\Peckr.Abstractions.csproj" />
+		<ProjectReference Include="..\Logs\Peckr.Logs.csproj" />
+		<ProjectReference Include="..\Metrics\Peckr.Metrics.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -8,7 +8,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Polly;
 using Polly.Retry;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
 
 namespace DiagnosticsMonitor.Metrics.Sources.Azure
 {

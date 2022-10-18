@@ -12,7 +12,7 @@ using System.Web;
 using DiagnosticsMonitor.Abstractions;
 using System.Text.Json;
 using Polly;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
 
 namespace DiagnosticsMonitor.Metrics.Sources.Azure
 {

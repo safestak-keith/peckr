@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using DiagnosticsMonitor.Abstractions;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
 
 namespace DiagnosticsMonitor.Metrics
 {

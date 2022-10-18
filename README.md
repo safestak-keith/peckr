@@ -2,13 +2,13 @@
 Peckr is a .NET Global Tool and console app to periodically monitor logs/metrics from a range of sources at a specified polling interval. 
 It can run endlessly, for a specified duration or terminate upon a success/failure condition. Optionally, it can also push all retrieved logs/metrics out to a range of supported sinks.
 
-## Install the .NET Core Global Tool
+## Install the .NET Global Tool
 ```bash
 dotnet tool install -g peckr
 ```
 The command above will install peckr as a global tool available as part of the system's path.
 
-## Running the .NET Core Global Tool
+## Running the .NET Global Tool
 ### Usage Overview
     USAGE: 
     

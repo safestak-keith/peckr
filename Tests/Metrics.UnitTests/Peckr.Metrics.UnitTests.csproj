@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<LangVersion>10.0</LangVersion>
+
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
@@ -15,15 +16,18 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="coverlet.collector" Version="1.1.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Src\ConsoleApp\DiagnosticsMonitor.ConsoleApp.csproj" />
-		<ProjectReference Include="..\Core\DiagnosticsMonitor.Tests.Core.csproj" />
+		<ProjectReference Include="..\..\Src\Abstractions\Peckr.Abstractions.csproj" />
+		<ProjectReference Include="..\..\Src\Metrics\Peckr.Metrics.csproj" />
+		<ProjectReference Include="..\Core\Peckr.Tests.Core.csproj" />
 	</ItemGroup>
 
+	<Target Name="WorkaroundNetStandard" AfterTargets="ResolvePackageAssets">
+		<ItemGroup>
+			<TransitiveFrameworkReference Remove="NETStandard.Library" />
+		</ItemGroup>
+	</Target>
 </Project>

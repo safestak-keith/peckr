@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
 
 namespace DiagnosticsMonitor.Logs.Sinks.Slack
 {

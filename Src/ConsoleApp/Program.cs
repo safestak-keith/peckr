@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DiagnosticsMonitor.Abstractions;
 using Microsoft.Extensions.Configuration;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
 
 namespace DiagnosticsMonitor.ConsoleApp
 {

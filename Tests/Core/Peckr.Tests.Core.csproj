@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Src\Abstractions\DiagnosticsMonitor.Abstractions.csproj" />
+		<ProjectReference Include="..\..\Src\Abstractions\Peckr.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>

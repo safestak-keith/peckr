@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using DiagnosticsMonitor.Abstractions;
 using Polly;
 using Slack.Webhooks;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static DiagnosticsMonitor.Abstractions.PeckrEventSource;
 
 namespace DiagnosticsMonitor.Metrics.Sinks.Slack
 {

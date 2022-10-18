@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{7794E4F6-704E-4244-B069-0CD0AC6071FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.ConsoleApp", "Src\ConsoleApp\DiagnosticsMonitor.ConsoleApp.csproj", "{6D0333BE-B35C-4D79-AC55-F03D008DE08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.ConsoleApp", "Src\ConsoleApp\Peckr.ConsoleApp.csproj", "{6D0333BE-B35C-4D79-AC55-F03D008DE08D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F4A05D72-AE1C-4156-A694-4441D2B506E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.Abstractions", "Src\Abstractions\DiagnosticsMonitor.Abstractions.csproj", "{4405881A-DAF9-4F18-A953-D1B0D25250A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.Abstractions", "Src\Abstractions\Peckr.Abstractions.csproj", "{4405881A-DAF9-4F18-A953-D1B0D25250A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01093AAB-A0A6-4760-A6C8-F410320F6C42}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,17 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.Logs", "Src\Logs\DiagnosticsMonitor.Logs.csproj", "{5292F5E8-74FB-420B-8FBD-E7EF009A6F8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.Logs", "Src\Logs\Peckr.Logs.csproj", "{5292F5E8-74FB-420B-8FBD-E7EF009A6F8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.Metrics", "Src\Metrics\DiagnosticsMonitor.Metrics.csproj", "{0AD467B4-BAEA-4E46-BC35-93EB51BCD70B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.Metrics", "Src\Metrics\Peckr.Metrics.csproj", "{0AD467B4-BAEA-4E46-BC35-93EB51BCD70B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.Logs.UnitTests", "Tests\Logs.UnitTests\DiagnosticsMonitor.Logs.UnitTests.csproj", "{A5186263-B120-4DBA-9C03-D0538A08F46E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.Logs.UnitTests", "Tests\Logs.UnitTests\Peckr.Logs.UnitTests.csproj", "{A5186263-B120-4DBA-9C03-D0538A08F46E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.Metrics.UnitTests", "Tests\Metrics.UnitTests\DiagnosticsMonitor.Metrics.UnitTests.csproj", "{4FFDCC0C-40BD-465B-9FC2-10E5A96A198A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.Metrics.UnitTests", "Tests\Metrics.UnitTests\Peckr.Metrics.UnitTests.csproj", "{4FFDCC0C-40BD-465B-9FC2-10E5A96A198A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.Tests.Core", "Tests\Core\DiagnosticsMonitor.Tests.Core.csproj", "{DD764F31-7756-4B84-A864-1458E72B6344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.Tests.Core", "Tests\Core\Peckr.Tests.Core.csproj", "{DD764F31-7756-4B84-A864-1458E72B6344}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiagnosticsMonitor.ConsoleApp.UnitTests", "Tests\ConsoleApp.UnitTests\DiagnosticsMonitor.ConsoleApp.UnitTests.csproj", "{CD461E84-BD55-4420-9694-65127E4720D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peckr.ConsoleApp.UnitTests", "Tests\ConsoleApp.UnitTests\Peckr.ConsoleApp.UnitTests.csproj", "{CD461E84-BD55-4420-9694-65127E4720D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
