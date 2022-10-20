@@ -1,14 +1,14 @@
-﻿# DiagnosticsMonitor (peckr)
-Diagnomon is a .NET Global Tool and console app to periodically monitor logs/metrics from a range of sources at a specified polling interval. 
+﻿# peckr
+Peckr is a .NET Global Tool and console app to periodically monitor logs/metrics from a range of sources at a specified polling interval. 
 It can run endlessly, for a specified duration or terminate upon a success/failure condition. Optionally, it can also push all retrieved logs/metrics out to a range of supported sinks.
 
-## Install the .NET Core Global Tool
+## Install the .NET Global Tool
 ```bash
 dotnet tool install -g peckr
 ```
-The command above will install diagnomon as a global tool available as part of the system's path.
+The command above will install peckr as a global tool available as part of the system's path.
 
-## Running the .NET Core Global Tool
+## Running the .NET Global Tool
 ### Usage Overview
     USAGE: 
     
@@ -19,7 +19,7 @@ The command above will install diagnomon as a global tool available as part of t
         --help or -h                                    display this list of options
         --durationToRunMinutes or -d <minutes>          duration in minutes to run the monitoring
         --pollingIntervalMilliseconds or -i <millis>    interval in milliseconds to poll the source
-        --monitorType or -m <type>                      type of monitor (see Monitor Types below)
+        --monitorType or -m <type>                      type of peckr (see Peckr Types below)
         --sourceConnection or -c <connection>           connection string or details for the source
         --sourceFilter or -f <filter>                   filter string to apply to the source
         --sourcePreviousSpanMinutes or -p <minutes>     previous span in minutes to check from the source
@@ -33,67 +33,67 @@ The command above will install diagnomon as a global tool available as part of t
         --sinkType or -n <type>                         type of outbound sink for the monitoring results
         --sinkConnection or -o <connection>             connection string or details for the sink
 
-### Monitor Types
+### Peckr Types
 - `azwdlogs_errscnt_upperbound`                    Azure WAD Logs Error Count Upper Threshold
 - `azwdperf_instavg_upperbound`                    Azure WAD Performace Counters Instance Average Aggregated Upper Threshold
-- `azailogs_slot_traffic`                          Azure AppInsights Slot Traffic Data Monitor
-- `azailogs_slot_role_cpu`                         Azure AppInsights CPU Threshold Monitor
-- `azailogs_slot_response_times`                   Azure AppInsights Response Times Threshold Monitor
+- `azailogs_slot_traffic`                          Azure AppInsights Slot Traffic Data Peckr
+- `azailogs_slot_role_cpu`                         Azure AppInsights CPU Threshold Peckr
+- `azailogs_slot_response_times`                   Azure AppInsights Response Times Threshold Peckr
 - Stay tuned, more coming soon!
 
 ### Quick and easy
 #### WAD Logs 
 ```bash
-diagnomon -m azwdlogs_errscnt_upperbound -c "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" -f "EventId ne 1337'"
+peckr -m azwdlogs_errscnt_upperbound -c "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" -f "EventId ne 1337'"
 ```
 
 #### WAD Performance Counters
 ```bash
-diagnomon -m azwdperf_instavg_upperbound -l 1200 -v 75 -c "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" -f "Counter eq 'Processor\% Processor Time'" 
+peckr -m azwdperf_instavg_upperbound -l 1200 -v 75 -c "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" -f "Counter eq 'Processor\% Processor Time'" 
 ```
 
-#### AppInsights Slot Traffic Threshold Monitor
+#### AppInsights Slot Traffic Threshold Peckr
 ```bash
-diagnomon -m azailogs_slot_traffic -l 15 -p 30 -d 30 -i 60000 -v 1100 -u 80 -c <appinsights-api-key> -t true -a <appinsights-resource-id> -e true -f "requests | extend deploymentId = tostring(customDimensions.DeploymentId)| where deploymentId == \"<slot-deployment-id>\"| summarize AverageRateRequestsPerSecond=sum(itemCount)/10 by deploymentId, bin(timestamp, 10s)" 
+peckr -m azailogs_slot_traffic -l 15 -p 30 -d 30 -i 60000 -v 1100 -u 80 -c <appinsights-api-key> -t true -a <appinsights-resource-id> -e true -f "requests | extend deploymentId = tostring(customDimensions.DeploymentId)| where deploymentId == \"<slot-deployment-id>\"| summarize AverageRateRequestsPerSecond=sum(itemCount)/10 by deploymentId, bin(timestamp, 10s)" 
 ```
 
-#### AppInsights CPU Performance Threshold Monitor
+#### AppInsights CPU Performance Threshold Peckr
 ```bash
-diagnomon -m azailogs_slot_role_cpu -l 0 -p 60 -d 5 -i 60000 -v 50 -c <appinsights-api-key> -t true -a <appinsights-resource-id> -e false -f "performanceCounters | where counter endswith \"Processor Time Normalized\" | extend deploymentId = tostring(customDimensions.DeploymentId) | where deploymentId == \"<slot-deployment-id>\" | summarize max(value) by bin(timestamp, 2h), cloud_RoleInstance, deploymentId" 
+peckr -m azailogs_slot_role_cpu -l 0 -p 60 -d 5 -i 60000 -v 50 -c <appinsights-api-key> -t true -a <appinsights-resource-id> -e false -f "performanceCounters | where counter endswith \"Processor Time Normalized\" | extend deploymentId = tostring(customDimensions.DeploymentId) | where deploymentId == \"<slot-deployment-id>\" | summarize max(value) by bin(timestamp, 2h), cloud_RoleInstance, deploymentId" 
 ```
 
-#### Azure AppInsights Response Times Threshold Monitor
+#### Azure AppInsights Response Times Threshold Peckr
 ```bash
-diagnomon -m azailogs_slot_response_times -l 0 -p 60 -d 5 -i 60000 -v 300 -c <appinsights-api-key> -t true -a <appinsights-resource-id> -e false -f "requests | where name !startswith \"GET /diagnostics\" | extend deploymentId = tostring(customDimensions.DeploymentId)  | where deploymentId == \"<slot-deployment-id>\" | extend ep = split(tolower(name), \"/\") | extend lastItemIdx = array_length(ep) - 1 | extend lastSegment = tostring(ep[lastItemIdx]) | extend removeLastSegment = isempty(lastSegment) or isnotnull(toint(lastSegment)) | extend sliceIdx = case(removeLastSegment, lastItemIdx - 1, lastItemIdx) | extend endpoint = strcat_array(array_slice(ep, 1,sliceIdx), \"/\") | summarize percentileResponeTimeMs=percentile(duration, 99) by bin(timestamp, 2h), endpoint, deploymentId" 
+peckr -m azailogs_slot_response_times -l 0 -p 60 -d 5 -i 60000 -v 300 -c <appinsights-api-key> -t true -a <appinsights-resource-id> -e false -f "requests | where name !startswith \"GET /diagnostics\" | extend deploymentId = tostring(customDimensions.DeploymentId)  | where deploymentId == \"<slot-deployment-id>\" | extend ep = split(tolower(name), \"/\") | extend lastItemIdx = array_length(ep) - 1 | extend lastSegment = tostring(ep[lastItemIdx]) | extend removeLastSegment = isempty(lastSegment) or isnotnull(toint(lastSegment)) | extend sliceIdx = case(removeLastSegment, lastItemIdx - 1, lastItemIdx) | extend endpoint = strcat_array(array_slice(ep, 1,sliceIdx), \"/\") | summarize percentileResponeTimeMs=percentile(duration, 99) by bin(timestamp, 2h), endpoint, deploymentId" 
 ```
 
 ### Slack Webhook Sink
 
 #### WAD Logs
 ```bash
-diagnomon --monitorType azwdlogs_errscnt_upperbound --sourceTakeLimit 100 --sourceConnection "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" --sourceAppOrResourceId "Foo API" --sourceFilter "EventId ne 1337'" --sinkType slackwebhook --sinkConnection "https://hooks.slack.com/services/zzzzz/yyyyyy/xxxxxx"
+peckr --monitorType azwdlogs_errscnt_upperbound --sourceTakeLimit 100 --sourceConnection "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" --sourceAppOrResourceId "Foo API" --sourceFilter "EventId ne 1337'" --sinkType slackwebhook --sinkConnection "https://hooks.slack.com/services/zzzzz/yyyyyy/xxxxxx"
 ```
 
 #### WAD Performance Counters
 ```bash
-diagnomon --monitorType azwdperf_instavg_upperbound --takeLimit 1000 --previousSpanMinutes 5 --expectedRunDurationMinutes 15 --pollingDelayMilliseconds 10000 --primaryThresholdValue 20 --sourceConnection "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" --appOrResourceId "Foo API" --sourceFilter "Counter eq 'Processor\% Processor Time'" --sinkType slackwebhook --sinkConnection "https://hooks.slack.com/services/zzzzz/yyyyyy/xxxxxx"
+peckr --monitorType azwdperf_instavg_upperbound --takeLimit 1000 --previousSpanMinutes 5 --expectedRunDurationMinutes 15 --pollingDelayMilliseconds 10000 --primaryThresholdValue 20 --sourceConnection "DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx==" --appOrResourceId "Foo API" --sourceFilter "Counter eq 'Processor\% Processor Time'" --sinkType slackwebhook --sinkConnection "https://hooks.slack.com/services/zzzzz/yyyyyy/xxxxxx"
 ```
 
 ## Development Guide
-The [.NET Core 3.1.x SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) is required to build and debug the solution on your local development machine. 
+The [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0) is required to build and debug the solution on your local development machine. 
 For contributions to the project please see our [CONTRIBUTING.md](./CONTRIBUTING.md) document for a guide on submitting new features or fixes.
 
 ### Code Architecture
 #### Program
--   args:string[] ￫ DeriveMonitorSettings ￫ **MonitorSettings**\
+-   args:string[] ￫ DerivePeckrSettings ￫ **PeckrSettings**\
     `Validate configuration and bind to domain settings type`
-    -   string[] ￫ MonitorConfiguration ￫ MonitorSettings
--   **MonitorSettings** ￫ **MonitorFactory**.GetMonitor ￫ **IConsoleMonitor**\
-    `GetMonitor takes Settings and returns PollingConsoleMonitor<IReadOnlyCollection<LogEntry>> or PollingConsoleMonitor<IReadOnlyCollection<Metric>>`
--   **MonitorSettings** ￫ **IConsoleMonitor**.MonitorAsync ￫ **ConsoleExitCode**\
-    `PollingConsoleMonitor.MonitorAsync takes Settings and returns Success or UnknownError codes`
-    -   **MonitorSettings** ￫ **IMonitoringResultPoller<T>**.PollAsync ￫ IAsyncEnumerable<**IMonitoringResult<T>**>\
+    -   string[] ￫ PeckrConfiguration ￫ PeckrSettings
+-   **PeckrSettings** ￫ **PeckrFactory**.GetPeckr ￫ **IConsolePeckr**\
+    `GetPeckr takes Settings and returns PollingConsolePeckr<IReadOnlyCollection<LogEntry>> or PollingConsolePeckr<IReadOnlyCollection<Metric>>`
+-   **PeckrSettings** ￫ **IConsolePeckr**.PeckrAsync ￫ **ConsoleExitCode**\
+    `PollingConsolePeckr.PeckrAsync takes Settings and returns Success or UnknownError codes`
+    -   **PeckrSettings** ￫ **IPeckResultPoller<T>**.PollAsync ￫ IAsyncEnumerable<**IPeckResult<T>**>\
         `T is IReadOnlyCollection<LogEntry> | IReadOnlyCollection<Metric>`
-        -   (start:DateTimeOffset,end:DateTimeOffset,takeLimit:int,customFilter:string,allowFailures:bool) ￫ **IMonitorDataRetriever<T>**.GetAsync ￫ T
-    -   **(IMonitoringResult<T>**,**MonitorSettings)** ￫ **IMonitoringResultSink<T>**.PushMonitoringResultAsync ￫ Task\
-        `PushMonitoringResultAsync takes the result and settings to push to a derived IMonitoringResultSink`
+        -   (start:DateTimeOffset,end:DateTimeOffset,takeLimit:int,customFilter:string,allowFailures:bool) ￫ **IPeckrDataRetriever<T>**.GetAsync ￫ T
+    -   **(IPeckResult<T>**,**PeckrSettings)** ￫ **IPeckResultSink<T>**.PushPeckResultAsync ￫ Task\
+        `PushPeckResultAsync takes the result and settings to push to a derived IPeckResultSink`

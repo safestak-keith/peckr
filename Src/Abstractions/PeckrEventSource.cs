@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {
     [EventSource(Name = "DiagnosticsMonitor-EventSource")]
-    public sealed class DiagnosticsMonitorEventSource : EventSource
+    public sealed class PeckrEventSource : EventSource
     {
-        public static readonly DiagnosticsMonitorEventSource Log = new DiagnosticsMonitorEventSource();
+        public static readonly PeckrEventSource Log = new PeckrEventSource();
 
         private readonly EventCounter _programElapsedCounter;
         private readonly EventCounter _retrievalElapsedCounter;
         private readonly EventCounter _sinkPushElapsedCounter;
 
-        private DiagnosticsMonitorEventSource()
+        private PeckrEventSource()
         {
             _programElapsedCounter = new EventCounter("ProgramCompletedElapsed", this);
             _retrievalElapsedCounter = new EventCounter("RetrieverRetrievalElapsed", this);

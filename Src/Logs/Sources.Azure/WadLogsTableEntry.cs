@@ -1,6 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace DiagnosticsMonitor.Logs.Sources.Azure
+namespace Peckr.Logs.Sources.Azure
 {
     public class WadLogsTableEntry : TableEntity
     {

@@ -1,4 +1,4 @@
-﻿namespace DiagnosticsMonitor.Abstractions
+﻿namespace Peckr.Abstractions
 {
     public interface IDataProcessor<in TResultIn, out TResultOut>
     {

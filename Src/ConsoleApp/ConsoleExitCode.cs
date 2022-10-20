@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     [Flags]
     public enum ConsoleExitCode

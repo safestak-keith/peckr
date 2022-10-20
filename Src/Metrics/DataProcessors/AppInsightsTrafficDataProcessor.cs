@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Metrics.Sources.Azure;
+using Peckr.Abstractions;
+using Peckr.Metrics.Sources.Azure;
 
-namespace DiagnosticsMonitor.Metrics.DataProcessors
+namespace Peckr.Metrics.DataProcessors
 {
     public class AppInsightsTrafficDataProcessor : IDataProcessor<AppInsightsQueryResult, IEnumerable<Metric>>
     {

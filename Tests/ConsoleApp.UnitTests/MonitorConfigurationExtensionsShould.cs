@@ -1,17 +1,17 @@
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace DiagnosticsMonitor.ConsoleApp.UnitTests
+namespace Peckr.ConsoleApp.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class MonitorConfigurationExtensionsShould
     {
         [Theory]
-        [InlineData(1, 1000, "azwdlogs_errscnt_upperbound", 10, "sc1", "sp1", "sf1", 10, "sa1", 0, 0, true, 1, null, null, null, MonitorType.AzureWadLogsErrorCountUpperThreshold, SinkType.None)]
-        [InlineData(5, 8000, "azwdperf_instavg_upperbound", 15, "sc2", "sp2", "sf2", 99, "sa2", 9, 6, false, 5, "slackwebhook", "sc2", "sp2", MonitorType.AzureWadPerformanceCountersInstanceAverageUpperThreshold, SinkType.SlackWebHook)]
+        [InlineData(1, 1000, "azwdlogs_errscnt_upperbound", 10, "sc1", "sp1", "sf1", 10, "sa1", 0, 0, true, 1, null, null, null, PeckrType.AzureWadLogsErrorCountUpperThreshold, SinkType.None)]
+        [InlineData(5, 8000, "azwdperf_instavg_upperbound", 15, "sc2", "sp2", "sf2", 99, "sa2", 9, 6, false, 5, "slackwebhook", "sc2", "sp2", PeckrType.AzureWadPerformanceCountersInstanceAverageUpperThreshold, SinkType.SlackWebHook)]
         public void Map_Everything_Correctly_Given_Valid_Configuration_When_Mapping_ToMonitorSettings(
             int durationToRunMinutes,
             int pollingIntervalMilliseconds,
@@ -29,10 +29,10 @@ namespace DiagnosticsMonitor.ConsoleApp.UnitTests
             string sinkType,
             string sinkConnection,
             string sinkPath,
-            MonitorType expectedMonitorType,
+            PeckrType expectedMonitorType,
             SinkType expectedSinkType)
         {
-            var configuration = new MonitorConfiguration
+            var configuration = new PeckrConfiguration
             {
                 DurationToRunMinutes = durationToRunMinutes,
                 PollingIntervalMilliseconds = pollingIntervalMilliseconds,
@@ -78,7 +78,7 @@ namespace DiagnosticsMonitor.ConsoleApp.UnitTests
         [InlineData("   ")]
         public void Validate_Mandatory_Properties_When_Calling_GetValidationErrors(string value)
         {
-            var configuration = new MonitorConfiguration
+            var configuration = new PeckrConfiguration
             {
                 DurationToRunMinutes = 10,
                 PollingIntervalMilliseconds = 1000,
@@ -106,7 +106,7 @@ namespace DiagnosticsMonitor.ConsoleApp.UnitTests
         [Fact]
         public void Validate_Positive_Numbers_For_Durations_And_Limits_When_Calling_GetValidationErrors()
         {
-            var configuration = new MonitorConfiguration
+            var configuration = new PeckrConfiguration
             {
                 DurationToRunMinutes = -1,
                 PollingIntervalMilliseconds = -1,

@@ -4,24 +4,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Metrics.UnitTests.Generators;
-using DiagnosticsMonitor.Tests.Core.Generators;
+using Peckr.Abstractions;
+using Peckr.Metrics.UnitTests.Generators;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests
+namespace Peckr.Metrics.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class InstanceMetricAverageUpperThresholdPollerShould
     {
-        private readonly Mock<IMonitorDataRetriever<IReadOnlyCollection<Metric>>> _mockRetriever;
+        private readonly Mock<IPeckDataRetriever<IReadOnlyCollection<Metric>>> _mockRetriever;
         private readonly InstanceMetricAverageUpperThresholdPoller _poller;
 
         public InstanceMetricAverageUpperThresholdPollerShould()
         {
-            _mockRetriever = new Mock<IMonitorDataRetriever<IReadOnlyCollection<Metric>>>();
+            _mockRetriever = new Mock<IPeckDataRetriever<IReadOnlyCollection<Metric>>>();
             _poller = new InstanceMetricAverageUpperThresholdPoller(_mockRetriever.Object);
         }
 

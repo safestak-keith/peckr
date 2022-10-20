@@ -2,7 +2,7 @@
 using System.Diagnostics.Tracing;
 using System.Linq;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     public sealed class ConsoleEventListener : EventListener
     {

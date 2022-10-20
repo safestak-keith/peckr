@@ -5,23 +5,23 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using Peckr.Abstractions;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Metrics
+namespace Peckr.Metrics
 {
-    public class InstanceMetricAverageUpperThresholdPoller : IMonitoringResultPoller<IReadOnlyCollection<Metric>>
+    public class InstanceMetricAverageUpperThresholdPoller : IPeckResultPoller<IReadOnlyCollection<Metric>>
     {
-        private readonly IMonitorDataRetriever<IReadOnlyCollection<Metric>> _metricRetriever;
+        private readonly IPeckDataRetriever<IReadOnlyCollection<Metric>> _metricRetriever;
 
         public InstanceMetricAverageUpperThresholdPoller(
-            IMonitorDataRetriever<IReadOnlyCollection<Metric>> metricRetriever)
+            IPeckDataRetriever<IReadOnlyCollection<Metric>> metricRetriever)
         {
             _metricRetriever = metricRetriever;
         }
 
-        public async IAsyncEnumerable<MonitoringResult<IReadOnlyCollection<Metric>>> PollAsync(
-            MonitorSettings settings,
+        public async IAsyncEnumerable<PeckResult<IReadOnlyCollection<Metric>>> PollAsync(
+            PeckrSettings settings,
             [EnumeratorCancellation]CancellationToken ct)
         {
             var sequence = 0;
@@ -46,7 +46,7 @@ namespace DiagnosticsMonitor.Metrics
                 var hasFailed = instanceAverageMetrics.Any(m => m.Value > settings.PrimaryThresholdValue);
                 if (hasFailed)
                 {
-                    yield return MonitoringResult<IReadOnlyCollection<Metric>>.Failure(instanceAverageMetrics);
+                    yield return PeckResult<IReadOnlyCollection<Metric>>.Failure(instanceAverageMetrics);
                     if (settings.TerminateWhenConditionMet)
                     {
                         Log.PollerTerminated(nameof(InstanceMetricAverageUpperThresholdPoller));
@@ -57,14 +57,14 @@ namespace DiagnosticsMonitor.Metrics
                 }
                 else
                 {
-                    yield return MonitoringResult<IReadOnlyCollection<Metric>>.Polling(instanceAverageMetrics);
+                    yield return PeckResult<IReadOnlyCollection<Metric>>.Polling(instanceAverageMetrics);
                 }
 
                 await Task.Delay(settings.PollingDelay, ct).ConfigureAwait(false);
             }
             Log.PollerCompleted(nameof(InstanceMetricAverageUpperThresholdPoller));
 
-            static bool ShouldKeepRunning(MonitorSettings ms, Stopwatch rs)
+            static bool ShouldKeepRunning(PeckrSettings ms, Stopwatch rs)
             {
                 return ms.ExpectedRunDuration == TimeSpan.Zero
                     || rs.ElapsedMilliseconds < ms.ExpectedRunDuration.TotalMilliseconds;

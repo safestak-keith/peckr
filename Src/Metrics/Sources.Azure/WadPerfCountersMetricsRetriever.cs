@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Polly;
 using Polly.Retry;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Metrics.Sources.Azure
+namespace Peckr.Metrics.Sources.Azure
 {
-    public class WadPerfCountersMetricsRetriever : IMonitorDataRetriever<IReadOnlyCollection<Metric>>
+    public class WadPerfCountersMetricsRetriever : IPeckDataRetriever<IReadOnlyCollection<Metric>>
     {
         private static readonly Random Jitter = new Random();
 

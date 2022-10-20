@@ -9,14 +9,14 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using System.Text.Json;
 using Polly;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Metrics.Sources.Azure
+namespace Peckr.Metrics.Sources.Azure
 {
-    public class AppInsightsMetricsRetriever : IMonitorDataRetriever<IReadOnlyCollection<Metric>>
+    public class AppInsightsMetricsRetriever : IPeckDataRetriever<IReadOnlyCollection<Metric>>
     {
         private const string Source = "app-insights";
 

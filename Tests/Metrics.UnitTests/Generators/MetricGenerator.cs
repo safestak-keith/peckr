@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests.Generators
+namespace Peckr.Metrics.UnitTests.Generators
 {
     public class MetricGenerator
     {

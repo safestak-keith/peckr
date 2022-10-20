@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DiagnosticsMonitor.Metrics
+namespace Peckr.Metrics
 {
     public static class InstanceMetricAverageAggregator
     {

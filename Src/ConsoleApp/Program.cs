@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 using Microsoft.Extensions.Configuration;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
     internal class Program
     {
@@ -32,11 +32,11 @@ namespace DiagnosticsMonitor.ConsoleApp
             }
 
             Log.ProgramStarted(settings.MonitorType.ToString(), settings.SourceAppOrResourceId, settings.SinkType.ToString());
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
             var stopwatch = Stopwatch.StartNew();
             try
             {
-                return (int)await monitor.MonitorAsync(settings, cts);
+                return (int)await peckr.PeckAsync(settings, cts);
             }
             catch (OperationCanceledException)
             {
@@ -55,7 +55,7 @@ namespace DiagnosticsMonitor.ConsoleApp
             return (int)ConsoleExitCode.Success;
         }
 
-        private static MonitorSettings TryDeriveSettings(string[] args)
+        private static PeckrSettings TryDeriveSettings(string[] args)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace DiagnosticsMonitor.ConsoleApp
                     .AddEnvironmentVariables()
                     .AddCommandLine(args, ConsoleArgs.Mappings)
                     .Build()
-                    .Get<MonitorConfiguration>()
+                    .Get<PeckrConfiguration>()
                     .ToMonitorSettings();
             }
             catch (ArgumentException ex)
@@ -79,7 +79,7 @@ namespace DiagnosticsMonitor.ConsoleApp
             const string helpText = @"
 USAGE: 
     
-diagnomon [--help] --monitorType <type> --sourceConnection <connection> [--durationToRunMinutes <minutes> (default: 10)] [--pollingIntervalMilliseconds <millis> (default: 5000)] [--sourceFilter <filter>] [--sourcePreviousSpanMinutes <minutes> (default: 5)] [--sourceTakeLimit <count> (default: 10)] [--sourceAppOrResourceId <appId>] [--primaryThresholdValue <value> (default: 0)] [--secondaryThresholdValue <value> (default: 0)] [--terminateWhenConditionMet <bool> (default: true)] [--shouldFailOnRunDurationExceeded <bool> (default: false)] [--cooldownWhenConditionMetMinutes <c> (default: 5)] [--sinkType <type>] [--sinkConnection <connection>]
+peckr [--help] --monitorType <type> --sourceConnection <connection> [--durationToRunMinutes <minutes> (default: 10)] [--pollingIntervalMilliseconds <millis> (default: 5000)] [--sourceFilter <filter>] [--sourcePreviousSpanMinutes <minutes> (default: 5)] [--sourceTakeLimit <count> (default: 10)] [--sourceAppOrResourceId <appId>] [--primaryThresholdValue <value> (default: 0)] [--secondaryThresholdValue <value> (default: 0)] [--terminateWhenConditionMet <bool> (default: true)] [--shouldFailOnRunDurationExceeded <bool> (default: false)] [--cooldownWhenConditionMetMinutes <c> (default: 5)] [--sinkType <type>] [--sinkConnection <connection>]
 
 OPTIONS:
 
@@ -102,15 +102,15 @@ OPTIONS:
 
 EXAMPLES:
 
-diagnomon -m azwdperf_instavg_upperbound -l 1200 -v 75 -c ""DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx=="" -f ""Counter eq 'Processor\% Processor Time'"" 
+peckr -m azwdperf_instavg_upperbound -l 1200 -v 75 -c ""DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx=="" -f ""Counter eq 'Processor\% Processor Time'"" 
 
-diagnomon --monitorType azwdlogs_errscnt_upperbound --sourceTakeLimit 100 --sourceConnection ""DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx=="" --sourceAppOrResourceId ""Foo API"" --sourceFilter ""EventId ne 1337"" --sinkType slackwebhook --sinkConnection ""https://hooks.slack.com/services/zzzzz/yyyyyy/xxxxxx""
+peckr --monitorType azwdlogs_errscnt_upperbound --sourceTakeLimit 100 --sourceConnection ""DefaultEndpointsProtocol=https;AccountName=fooapistor;AccountKey=xxxxxxxxxxxxxxxxxxxx=="" --sourceAppOrResourceId ""Foo API"" --sourceFilter ""EventId ne 1337"" --sinkType slackwebhook --sinkConnection ""https://hooks.slack.com/services/zzzzz/yyyyyy/xxxxxx""
 ";
             var versionString = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException())
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 .InformationalVersion;
 
-            Console.WriteLine($"Diagnomon - Diagnostics Monitor v{versionString}");
+            Console.WriteLine($"Peckr v{versionString}");
             Console.WriteLine("=========================================");
             Console.WriteLine(helpText);
         }

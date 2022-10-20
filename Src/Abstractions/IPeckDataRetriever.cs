@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DiagnosticsMonitor.Abstractions
+namespace Peckr.Abstractions
 {
-    public interface IMonitorDataRetriever<TResult>
+    public interface IPeckDataRetriever<TResult>
     {
         Task<TResult> GetAsync(
             DateTimeOffset start,

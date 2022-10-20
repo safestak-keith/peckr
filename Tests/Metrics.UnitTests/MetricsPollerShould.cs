@@ -1,6 +1,6 @@
-﻿using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Metrics.UnitTests.Generators;
-using DiagnosticsMonitor.Tests.Core.Generators;
+﻿using Peckr.Abstractions;
+using Peckr.Metrics.UnitTests.Generators;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using Moq;
 using System;
@@ -8,23 +8,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Tests.Core.Extensions;
+using Peckr.Tests.Core.Extensions;
 using Xunit;
 using Range = Moq.Range;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests
+namespace Peckr.Metrics.UnitTests
 {
     public class MetricsPollerShould
     {
         private readonly MetricsPoller _successPoller;
         private readonly MetricsPoller _failurePoller;
-        private readonly Mock<IMonitorDataRetriever<IReadOnlyCollection<Metric>>> _mockRetriever;
-        private readonly Mock<IMonitoringResultEvaluator<IReadOnlyCollection<Metric>>> _mockEvaluator;
+        private readonly Mock<IPeckDataRetriever<IReadOnlyCollection<Metric>>> _mockRetriever;
+        private readonly Mock<IPeckResultEvaluator<IReadOnlyCollection<Metric>>> _mockEvaluator;
 
         public MetricsPollerShould()
         {
-            _mockRetriever = new Mock<IMonitorDataRetriever<IReadOnlyCollection<Metric>>>();
-            _mockEvaluator = new Mock<IMonitoringResultEvaluator<IReadOnlyCollection<Metric>>>();
+            _mockRetriever = new Mock<IPeckDataRetriever<IReadOnlyCollection<Metric>>>();
+            _mockEvaluator = new Mock<IPeckResultEvaluator<IReadOnlyCollection<Metric>>>();
             _successPoller = new MetricsPoller(_mockRetriever.Object, _mockEvaluator.Object);
             _failurePoller = new MetricsPoller(_mockRetriever.Object, _mockEvaluator.Object, false);
         }
@@ -50,9 +50,9 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
                 .ReturnsAsync(MetricGenerator.OfPercentage(valueWithinSecondaryThreshold, s => primaryThresholdValue, f => primaryThresholdValue + 0.1));
 
             var pollCount = 0;
-            await foreach (var monitorResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
+            await foreach (var peckrResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
             {
-                monitorResult.Outcome.Should().Be(MonitoringOutcome.Success);
+                peckrResult.Outcome.Should().Be(MonitoringOutcome.Success);
                 pollCount++;
             }
 
@@ -80,9 +80,9 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
                 .ReturnsAsync(MetricGenerator.OfPercentage(valueWithinSecondaryThreshold, s => primaryThresholdValue, f => primaryThresholdValue + 0.1));
 
             var pollCount = 0;
-            await foreach (var monitorResult in _failurePoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
+            await foreach (var peckrResult in _failurePoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
             {
-                monitorResult.Outcome.Should().Be(MonitoringOutcome.Failure);
+                peckrResult.Outcome.Should().Be(MonitoringOutcome.Failure);
                 pollCount++;
             }
 
@@ -124,10 +124,10 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
             };
 
             var pollCount = 0;
-            await foreach (var monitorResult in _successPoller.PollAsync(settings, CancellationToken.None)
+            await foreach (var peckrResult in _successPoller.PollAsync(settings, CancellationToken.None)
                 .ConfigureAwait(false))
             {
-                monitorResult.Outcome.Should().Be(expectedMonitoringOutcomes[pollCount]);
+                peckrResult.Outcome.Should().Be(expectedMonitoringOutcomes[pollCount]);
                 pollCount++;
             }
             pollCount.Should().Be(4);
@@ -168,10 +168,10 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
             };
 
             var pollCount = 0;
-            await foreach (var monitorResult in _failurePoller.PollAsync(settings, CancellationToken.None)
+            await foreach (var peckrResult in _failurePoller.PollAsync(settings, CancellationToken.None)
                 .ConfigureAwait(false))
             {
-                monitorResult.Outcome.Should().Be(expectedMonitoringOutcomes[pollCount]);
+                peckrResult.Outcome.Should().Be(expectedMonitoringOutcomes[pollCount]);
                 pollCount++;
             }
             pollCount.Should().Be(4);
@@ -202,9 +202,9 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
 
             var sw = await ActionTimer.MeasureAsync(async () =>
             {
-                await foreach (var monitorResult in _failurePoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
+                await foreach (var peckrResult in _failurePoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
                 {
-                    monitorResult.Outcome.Should().Be(MonitoringOutcome.Polling);
+                    peckrResult.Outcome.Should().Be(MonitoringOutcome.Polling);
                 }
             });
 
@@ -245,9 +245,9 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
 
             var sw = await ActionTimer.MeasureAsync(async () =>
             {
-                await foreach (var monitorResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
+                await foreach (var peckrResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
                 {
-                    monitorResult.Outcome.Should().Be(MonitoringOutcome.Polling);
+                    peckrResult.Outcome.Should().Be(MonitoringOutcome.Polling);
                 }
             });
 
@@ -296,9 +296,9 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
                 .ReturnsAsync(MetricGenerator.OfPercentage(79, SuccessValueProvider, FailureValueProvider));
 
             var finalOutcome = MonitoringOutcome.Polling;
-            await foreach (var monitorResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
+            await foreach (var peckrResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
             {
-                finalOutcome = monitorResult.Outcome;
+                finalOutcome = peckrResult.Outcome;
             }
 
             finalOutcome.Should().Be(MonitoringOutcome.TimedOut);
@@ -337,9 +337,9 @@ namespace DiagnosticsMonitor.Metrics.UnitTests
                 .ReturnsAsync(MetricGenerator.OfPercentage(79, SuccessValueProvider, FailureValueProvider));
 
             var finalOutcome = MonitoringOutcome.TimedOut;
-            await foreach (var monitorResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
+            await foreach (var peckrResult in _successPoller.PollAsync(settings, CancellationToken.None).ConfigureAwait(false))
             {
-                finalOutcome = monitorResult.Outcome;
+                finalOutcome = peckrResult.Outcome;
             }
 
             finalOutcome.Should().Be(MonitoringOutcome.Polling);

@@ -4,24 +4,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using DiagnosticsMonitor.Logs.UnitTests.Generators;
-using DiagnosticsMonitor.Tests.Core.Generators;
+using Peckr.Abstractions;
+using Peckr.Logs.UnitTests.Generators;
+using Peckr.Tests.Core.Generators;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace DiagnosticsMonitor.Logs.UnitTests
+namespace Peckr.Logs.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class LogCountUpperThresholdPollerShould
     {
-        private readonly Mock<IMonitorDataRetriever<IReadOnlyCollection<LogEntry>>> _mockRetriever;
+        private readonly Mock<IPeckDataRetriever<IReadOnlyCollection<LogEntry>>> _mockRetriever;
         private readonly LogCountUpperThresholdPoller _poller;
 
         public LogCountUpperThresholdPollerShould()
         {
-            _mockRetriever = new Mock<IMonitorDataRetriever<IReadOnlyCollection<LogEntry>>>();
+            _mockRetriever = new Mock<IPeckDataRetriever<IReadOnlyCollection<LogEntry>>>();
             _poller = new LogCountUpperThresholdPoller(_mockRetriever.Object);
         }
 

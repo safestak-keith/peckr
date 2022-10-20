@@ -1,35 +1,35 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 
-namespace DiagnosticsMonitor.ConsoleApp
+namespace Peckr.ConsoleApp
 {
-    public interface IConsoleMonitor
+    public interface IConsolePeckr
     {
-        Task<ConsoleExitCode> MonitorAsync(
-            MonitorSettings settings, CancellationTokenSource cts);
+        Task<ConsoleExitCode> PeckAsync(
+            PeckrSettings settings, CancellationTokenSource cts);
     }
 
-    public class PollingConsoleMonitor<T> : IConsoleMonitor
+    public class PollingConsolePeckr<T> : IConsolePeckr
     {
-        private readonly IMonitoringResultPoller<T> _poller;
-        private readonly IMonitoringResultSink<T> _monitoringResultSink;
+        private readonly IPeckResultPoller<T> _poller;
+        private readonly IPeckResultSink<T> _resultSink;
 
-        public PollingConsoleMonitor(
-            IMonitoringResultPoller<T> poller,
-            IMonitoringResultSink<T> monitoringResultSink)
+        public PollingConsolePeckr(
+            IPeckResultPoller<T> poller,
+            IPeckResultSink<T> monitoringResultSink)
         {
             _poller = poller;
-            _monitoringResultSink = monitoringResultSink;
+            _resultSink = monitoringResultSink;
         }
 
-        public async Task<ConsoleExitCode> MonitorAsync(
-            MonitorSettings settings, CancellationTokenSource cts)
+        public async Task<ConsoleExitCode> PeckAsync(
+            PeckrSettings settings, CancellationTokenSource cts)
         {
-            await foreach (var monitorResult in _poller.PollAsync(settings, cts.Token).ConfigureAwait(false))
+            await foreach (var peckResult in _poller.PollAsync(settings, cts.Token).ConfigureAwait(false))
             {
-                await _monitoringResultSink.PushMonitoringResultAsync(monitorResult, settings, cts.Token).ConfigureAwait(false);
-                switch (monitorResult.Outcome)
+                await _resultSink.PushMonitoringResultAsync(peckResult, settings, cts.Token).ConfigureAwait(false);
+                switch (peckResult.Outcome)
                 {
                     case MonitoringOutcome.Polling:
                         break;

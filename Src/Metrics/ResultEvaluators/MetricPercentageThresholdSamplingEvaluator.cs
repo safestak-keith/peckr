@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiagnosticsMonitor.Abstractions;
+using Peckr.Abstractions;
 
-namespace DiagnosticsMonitor.Metrics.ResultEvaluators
+namespace Peckr.Metrics.ResultEvaluators
 {
-    public class MetricPercentageThresholdSamplingEvaluator : IMonitoringResultEvaluator<IReadOnlyCollection<Metric>>
+    public class MetricPercentageThresholdSamplingEvaluator : IPeckResultEvaluator<IReadOnlyCollection<Metric>>
     {
         private readonly double _primaryThresholdValue;
         private readonly double _secondaryThresholdValue;

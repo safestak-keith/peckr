@@ -4,23 +4,23 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using DiagnosticsMonitor.Abstractions;
-using static DiagnosticsMonitor.Abstractions.DiagnosticsMonitorEventSource;
+using Peckr.Abstractions;
+using static Peckr.Abstractions.PeckrEventSource;
 
-namespace DiagnosticsMonitor.Logs
+namespace Peckr.Logs
 {
-    public class LogCountUpperThresholdPoller : IMonitoringResultPoller<IReadOnlyCollection<LogEntry>>
+    public class LogCountUpperThresholdPoller : IPeckResultPoller<IReadOnlyCollection<LogEntry>>
     {
-        private readonly IMonitorDataRetriever<IReadOnlyCollection<LogEntry>> _logRetriever;
+        private readonly IPeckDataRetriever<IReadOnlyCollection<LogEntry>> _logRetriever;
 
         public LogCountUpperThresholdPoller(
-            IMonitorDataRetriever<IReadOnlyCollection<LogEntry>> logRetriever)
+            IPeckDataRetriever<IReadOnlyCollection<LogEntry>> logRetriever)
         {
             _logRetriever = logRetriever;
         }
 
-        public async IAsyncEnumerable<MonitoringResult<IReadOnlyCollection<LogEntry>>> PollAsync(
-            MonitorSettings settings,
+        public async IAsyncEnumerable<PeckResult<IReadOnlyCollection<LogEntry>>> PollAsync(
+            PeckrSettings settings,
             [EnumeratorCancellation]CancellationToken ct)
         {
             var sequence = 0;
@@ -40,7 +40,7 @@ namespace DiagnosticsMonitor.Logs
                 var hasFailed = logs.Count > settings.PrimaryThresholdValue;
                 if (hasFailed)
                 {
-                    yield return MonitoringResult<IReadOnlyCollection<LogEntry>>.Failure(logs);
+                    yield return PeckResult<IReadOnlyCollection<LogEntry>>.Failure(logs);
                     if (settings.TerminateWhenConditionMet)
                     {
                         Log.PollerTerminated(nameof(LogCountUpperThresholdPoller));
@@ -51,14 +51,14 @@ namespace DiagnosticsMonitor.Logs
                 }
                 else
                 {
-                    yield return MonitoringResult<IReadOnlyCollection<LogEntry>>.Polling(logs);
+                    yield return PeckResult<IReadOnlyCollection<LogEntry>>.Polling(logs);
                 }
 
                 await Task.Delay(settings.PollingDelay, ct).ConfigureAwait(false);
             }
             Log.PollerCompleted(nameof(LogCountUpperThresholdPoller));
 
-            static bool ShouldKeepRunning(MonitorSettings ms, Stopwatch rs)
+            static bool ShouldKeepRunning(PeckrSettings ms, Stopwatch rs)
             {
                 return ms.ExpectedRunDuration == TimeSpan.Zero
                     || rs.ElapsedMilliseconds < ms.ExpectedRunDuration.TotalMilliseconds;

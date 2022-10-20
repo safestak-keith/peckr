@@ -1,9 +1,9 @@
 using System;
-using DiagnosticsMonitor.Logs.Sources.Azure;
+using Peckr.Logs.Sources.Azure;
 using FluentAssertions;
 using Xunit;
 
-namespace DiagnosticsMonitor.Logs.UnitTests
+namespace Peckr.Logs.UnitTests
 {
     [Collection("UnitTestFixtures")]
     public class WadLogsTableEntryMapperShould

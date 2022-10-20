@@ -1,9 +1,9 @@
 ﻿using System;
-using DiagnosticsMonitor.Metrics.ResultEvaluators;
+using Peckr.Metrics.ResultEvaluators;
 using FluentAssertions;
 using Xunit;
 
-namespace DiagnosticsMonitor.Metrics.UnitTests.ResultEvaluators
+namespace Peckr.Metrics.UnitTests.ResultEvaluators
 {
     public class MetricSingleUpperThresholdEvaluatorShould
     {

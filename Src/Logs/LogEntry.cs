@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiagnosticsMonitor.Logs
+namespace Peckr.Logs
 {
     public enum LogLevel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DiagnosticsMonitor.Metrics.Sources.Azure
+namespace Peckr.Metrics.Sources.Azure
 {
     public class AppInsightsQueryResult
     {
