@@ -11,7 +11,7 @@ using static Peckr.Abstractions.PeckrEventSource;
 
 namespace Peckr.Logs.Sources.Azure
 {
-    public class WadLogsErrorsRetriever : IMonitorDataRetriever<IReadOnlyCollection<LogEntry>>
+    public class WadLogsErrorsRetriever : IPeckDataRetriever<IReadOnlyCollection<LogEntry>>
     {
         private static readonly Random Jitter = new Random();
 

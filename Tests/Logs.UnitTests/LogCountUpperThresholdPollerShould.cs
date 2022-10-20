@@ -16,12 +16,12 @@ namespace Peckr.Logs.UnitTests
     [Collection("UnitTestFixtures")]
     public class LogCountUpperThresholdPollerShould
     {
-        private readonly Mock<IMonitorDataRetriever<IReadOnlyCollection<LogEntry>>> _mockRetriever;
+        private readonly Mock<IPeckDataRetriever<IReadOnlyCollection<LogEntry>>> _mockRetriever;
         private readonly LogCountUpperThresholdPoller _poller;
 
         public LogCountUpperThresholdPollerShould()
         {
-            _mockRetriever = new Mock<IMonitorDataRetriever<IReadOnlyCollection<LogEntry>>>();
+            _mockRetriever = new Mock<IPeckDataRetriever<IReadOnlyCollection<LogEntry>>>();
             _poller = new LogCountUpperThresholdPoller(_mockRetriever.Object);
         }
 

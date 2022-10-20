@@ -20,39 +20,39 @@ namespace Peckr.ConsoleApp.UnitTests
         public void Create_Monitor_With_Correct_Poller_Dependency_Given_AzureWadPerformanceCountersInstanceAverageUpperThreshold_MonitorType()
         {
             var settings = MonitorSettingsGenerator.Create(
-                monitorType: MonitorType.AzureWadPerformanceCountersInstanceAverageUpperThreshold);
+                peckrType: PeckrType.AzureWadPerformanceCountersInstanceAverageUpperThreshold);
 
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
 
-            var monitorPoller = typeof(PollingConsoleMonitor<IReadOnlyCollection<Metric>>)
-                .GetField("_poller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(monitor);
-            monitorPoller.Should().BeOfType<InstanceMetricAverageUpperThresholdPoller>();
+            var peckrPoller = typeof(PollingConsolePeckr<IReadOnlyCollection<Metric>>)
+                .GetField("_poller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(peckr);
+            peckrPoller.Should().BeOfType<InstanceMetricAverageUpperThresholdPoller>();
         }
 
         [Fact]
         public void Create_Monitor_With_Correct_Poller_Dependency_Given_AzureWadLogsErrorCountUpperThreshold_MonitorType()
         {
             var settings = MonitorSettingsGenerator.Create(
-                monitorType: MonitorType.AzureWadLogsErrorCountUpperThreshold);
+                peckrType: PeckrType.AzureWadLogsErrorCountUpperThreshold);
 
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
 
-            var monitorPoller = typeof(PollingConsoleMonitor<IReadOnlyCollection<LogEntry>>)
-                .GetField("_poller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(monitor);
-            monitorPoller.Should().BeOfType<LogCountUpperThresholdPoller>();
+            var peckrPoller = typeof(PollingConsolePeckr<IReadOnlyCollection<LogEntry>>)
+                .GetField("_poller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(peckr);
+            peckrPoller.Should().BeOfType<LogCountUpperThresholdPoller>();
         }
 
         [Fact]
         public void Create_Monitor_With_Correct_Sink_Dependencies_Given_SlackWebHook_SinkType_And_AzureWadLogsErrorCountUpperThreshold_MonitorType()
         {
             var settings = MonitorSettingsGenerator.Create(
-                monitorType: MonitorType.AzureWadLogsErrorCountUpperThreshold,
+                peckrType: PeckrType.AzureWadLogsErrorCountUpperThreshold,
                 sinkType: SinkType.SlackWebHook, sinkConnection: "https://hooks.slack.com/services/A1A1A1A1A/B2B2B2B2B/abcd1234abcd1234abcd1234");
 
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
 
-            var decoratorSink = typeof(PollingConsoleMonitor<IReadOnlyCollection<LogEntry>>)
-                .GetField("_monitoringResultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(monitor);
+            var decoratorSink = typeof(PollingConsolePeckr<IReadOnlyCollection<LogEntry>>)
+                .GetField("_resultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(peckr);
             var slackSink = typeof(LogConsoleSink)
                 .GetField("_decoratedSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(decoratorSink);
             decoratorSink.Should().BeOfType<LogConsoleSink>();
@@ -63,30 +63,30 @@ namespace Peckr.ConsoleApp.UnitTests
         public void Create_Monitor_With_Correct_Sink_Dependencies_Given_SinkType_Of_None_And_AzureWadLogsErrorCountUpperThreshold_MonitorType()
         {
             var settings = MonitorSettingsGenerator.Create(
-                monitorType: MonitorType.AzureWadLogsErrorCountUpperThreshold,
+                peckrType: PeckrType.AzureWadLogsErrorCountUpperThreshold,
                 sinkType: SinkType.None);
 
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
 
-            var decoratorSink = typeof(PollingConsoleMonitor<IReadOnlyCollection<LogEntry>>)
-                .GetField("_monitoringResultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(monitor);
+            var decoratorSink = typeof(PollingConsolePeckr<IReadOnlyCollection<LogEntry>>)
+                .GetField("_resultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(peckr);
             var voidSink = typeof(LogConsoleSink)
                 .GetField("_decoratedSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(decoratorSink);
             decoratorSink.Should().BeOfType<LogConsoleSink>();
-            voidSink.Should().BeOfType<VoidMonitoringResultSink<IReadOnlyCollection<LogEntry>>>();
+            voidSink.Should().BeOfType<VoidPeckResultSink<IReadOnlyCollection<LogEntry>>>();
         }
 
         [Fact]
         public void Create_Monitor_With_Correct_Sink_Dependencies_Given_SlackWebHook_SinkType_And_AzureWadPerformanceCountersInstanceAverageUpperThreshold_MonitorType()
         {
             var settings = MonitorSettingsGenerator.Create(
-                monitorType: MonitorType.AzureWadPerformanceCountersInstanceAverageUpperThreshold,
+                peckrType: PeckrType.AzureWadPerformanceCountersInstanceAverageUpperThreshold,
                 sinkType: SinkType.SlackWebHook, sinkConnection: "https://hooks.slack.com/services/A1A1A1A1A/B2B2B2B2B/abcd1234abcd1234abcd1234");
 
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
 
-            var decoratorSink = typeof(PollingConsoleMonitor<IReadOnlyCollection<Metric>>)
-                .GetField("_monitoringResultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(monitor);
+            var decoratorSink = typeof(PollingConsolePeckr<IReadOnlyCollection<Metric>>)
+                .GetField("_resultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(peckr);
             var slackSink = typeof(MetricConsoleSink)
                 .GetField("_decoratedSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(decoratorSink);
             decoratorSink.Should().BeOfType<MetricConsoleSink>();
@@ -97,17 +97,17 @@ namespace Peckr.ConsoleApp.UnitTests
         public void Create_Monitor_With_Correct_Sink_Dependencies_Given_SinkType_Of_None_And_AzureWadPerformanceCountersInstanceAverageUpperThreshold_MonitorType()
         {
             var settings = MonitorSettingsGenerator.Create(
-                monitorType: MonitorType.AzureWadPerformanceCountersInstanceAverageUpperThreshold,
+                peckrType: PeckrType.AzureWadPerformanceCountersInstanceAverageUpperThreshold,
                 sinkType: SinkType.None);
 
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
 
-            var decoratorSink = typeof(PollingConsoleMonitor<IReadOnlyCollection<Metric>>)
-                .GetField("_monitoringResultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(monitor);
+            var decoratorSink = typeof(PollingConsolePeckr<IReadOnlyCollection<Metric>>)
+                .GetField("_resultSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(peckr);
             var voidSink = typeof(MetricConsoleSink)
                 .GetField("_decoratedSink", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(decoratorSink);
             decoratorSink.Should().BeOfType<MetricConsoleSink>();
-            voidSink.Should().BeOfType<VoidMonitoringResultSink<IReadOnlyCollection<Metric>>>();
+            voidSink.Should().BeOfType<VoidPeckResultSink<IReadOnlyCollection<Metric>>>();
         }
     }
 }

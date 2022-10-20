@@ -1,6 +1,6 @@
 ﻿namespace Peckr.Abstractions
 {
-    public interface IMonitoringResultEvaluator<in TResult>
+    public interface IPeckResultEvaluator<in TResult>
     {
         public bool IsConditionMet(TResult result);
     }

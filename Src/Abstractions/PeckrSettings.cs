@@ -2,7 +2,7 @@
 
 namespace Peckr.Abstractions
 {
-    public enum MonitorType
+    public enum PeckrType
     {
         AzureWadLogsErrorCountUpperThreshold,
         AzureWadPerformanceCountersInstanceAverageUpperThreshold,
@@ -23,11 +23,11 @@ namespace Peckr.Abstractions
         //AzureAppInsightsDependencies
     }
 
-    public class MonitorSettings
+    public class PeckrSettings
     {
         public TimeSpan ExpectedRunDuration { get; }
         public TimeSpan PollingDelay { get; }
-        public MonitorType MonitorType { get; }
+        public PeckrType MonitorType { get; }
         public TimeSpan SourcePreviousSpan { get; }
         public string SourceConnection { get; }
         public string SourcePath { get; }
@@ -43,10 +43,10 @@ namespace Peckr.Abstractions
         public string SinkConnection { get; }
         public string SinkPath{ get; }
 
-        public MonitorSettings(
+        public PeckrSettings(
             TimeSpan expectedRunDuration, 
             TimeSpan pollingDelay, 
-            MonitorType monitorType,
+            PeckrType peckrType,
             TimeSpan sourcePreviousSpan, 
             string sourceConnection, 
             string sourcePath, 
@@ -64,7 +64,7 @@ namespace Peckr.Abstractions
         {
             ExpectedRunDuration = expectedRunDuration;
             PollingDelay = pollingDelay;
-            MonitorType = monitorType;
+            MonitorType = peckrType;
             SourcePreviousSpan = sourcePreviousSpan;
             SourceConnection = sourceConnection ?? throw new ArgumentNullException(nameof(sourceConnection));
             SourcePath = sourcePath;

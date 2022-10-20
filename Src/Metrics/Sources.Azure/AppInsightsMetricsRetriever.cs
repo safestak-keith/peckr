@@ -16,7 +16,7 @@ using static Peckr.Abstractions.PeckrEventSource;
 
 namespace Peckr.Metrics.Sources.Azure
 {
-    public class AppInsightsMetricsRetriever : IMonitorDataRetriever<IReadOnlyCollection<Metric>>
+    public class AppInsightsMetricsRetriever : IPeckDataRetriever<IReadOnlyCollection<Metric>>
     {
         private const string Source = "app-insights";
 

@@ -9,30 +9,30 @@ using Peckr.Metrics;
 
 namespace Peckr.ConsoleApp.Sinks
 {
-    public class MetricConsoleSink : IMonitoringResultSink<IReadOnlyCollection<Metric>>
+    public class MetricConsoleSink : IPeckResultSink<IReadOnlyCollection<Metric>>
     {
-        private readonly IMonitoringResultSink<IReadOnlyCollection<Metric>> _decoratedSink;
+        private readonly IPeckResultSink<IReadOnlyCollection<Metric>> _decoratedSink;
 
-        public MetricConsoleSink(IMonitoringResultSink<IReadOnlyCollection<Metric>> decoratedSink)
+        public MetricConsoleSink(IPeckResultSink<IReadOnlyCollection<Metric>> decoratedSink)
         {
             _decoratedSink = decoratedSink;
         }
 
         public async ValueTask PushMonitoringResultAsync(
-            MonitoringResult<IReadOnlyCollection<Metric>> monitoringResult,
-            MonitorSettings settings,
+            PeckResult<IReadOnlyCollection<Metric>> peckResult,
+            PeckrSettings settings,
             CancellationToken ct)
         {
-            if (monitoringResult.IsFailure(settings))
+            if (peckResult.IsFailure(settings))
             {
-                OutputMetricResults(monitoringResult.Result, Console.Error.WriteLine);
+                OutputMetricResults(peckResult.Result, Console.Error.WriteLine);
             }
             else
             {
-                OutputMetricResults(monitoringResult.Result, Console.WriteLine);
+                OutputMetricResults(peckResult.Result, Console.WriteLine);
             }
 
-            await _decoratedSink.PushMonitoringResultAsync(monitoringResult, settings, ct).ConfigureAwait(false);
+            await _decoratedSink.PushMonitoringResultAsync(peckResult, settings, ct).ConfigureAwait(false);
         }
 
         private static void OutputMetricResults(IReadOnlyCollection<Metric> results, Action<string> printLine)

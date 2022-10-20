@@ -7,7 +7,7 @@ namespace Peckr.Tests.Core.Generators
     {
         public const int DefaultExpectedRunDurationSeconds = 500;
         public const int DefaultPollingDelayMilliseconds = 5000;
-        public const MonitorType DefaultMonitorType = MonitorType.AzureWadLogsErrorCountUpperThreshold;
+        public const PeckrType DefaultPeckrType = PeckrType.AzureWadLogsErrorCountUpperThreshold;
         public const int DefaultSourcePreviousSpanSeconds = 60;
         public const string DefaultSourceConnection = "DefaultEndpointsProtocol=https;AccountName=storage;AccountKey=aaaabbbbccccddddeeeeffffgggghhhhAAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHaaaabbbbccccddddeeeeff==";
         public const string DefaultSourcePath = "path/to/source";
@@ -23,10 +23,10 @@ namespace Peckr.Tests.Core.Generators
         public const string DefaultSinkConnection = "";
         public const string DefaultSinkPath = "";
         
-        public static MonitorSettings Create(
+        public static PeckrSettings Create(
             int expectedRunDurationSeconds = DefaultExpectedRunDurationSeconds,
             int pollingDelayMilliseconds = DefaultPollingDelayMilliseconds,
-            MonitorType monitorType = DefaultMonitorType,
+            PeckrType peckrType = DefaultPeckrType,
             int sourcePreviousSpanSeconds = DefaultSourcePreviousSpanSeconds,
             string sourceConnection = DefaultSourceConnection,
             string sourcePath = DefaultSourcePath,
@@ -42,10 +42,10 @@ namespace Peckr.Tests.Core.Generators
             string sinkConnection = DefaultSinkConnection,
             string sinkPath = DefaultSinkPath)
         {
-            return new MonitorSettings(
+            return new PeckrSettings(
                 TimeSpan.FromSeconds(expectedRunDurationSeconds),
                 TimeSpan.FromMilliseconds(pollingDelayMilliseconds),
-                monitorType,
+                peckrType,
                 TimeSpan.FromSeconds(sourcePreviousSpanSeconds),
                 sourceConnection,
                 sourcePath,

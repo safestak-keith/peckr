@@ -23,21 +23,21 @@ namespace Peckr.ConsoleApp
         public static readonly Dictionary<string, string> Mappings =
             new Dictionary<string, string>
             {
-                { DurationToRunMinutes, $"{nameof(MonitorConfiguration.DurationToRunMinutes)}" },
-                { PollingIntervalMilliseconds, $"{nameof(MonitorConfiguration.PollingIntervalMilliseconds)}" },
-                { MonitorType, $"{nameof(MonitorConfiguration.MonitorType)}" },
-                { SourceTakeLimit, $"{nameof(MonitorConfiguration.SourceTakeLimit)}" },
-                { SourcePreviousSpanMinutes, $"{nameof(MonitorConfiguration.SourcePreviousSpanMinutes)}" },
-                { SourceConnection, $"{nameof(MonitorConfiguration.SourceConnection)}" },
-                { SourceFilter, $"{nameof(MonitorConfiguration.SourceFilter)}" },
-                { SourceAppOrResourceId, $"{nameof(MonitorConfiguration.SourceAppOrResourceId)}" },
-                { PrimaryThresholdValue, $"{nameof(MonitorConfiguration.PrimaryThresholdValue)}" },
-                { SecondaryThresholdValue, $"{nameof(MonitorConfiguration.SecondaryThresholdValue)}" },
-                { TerminateWhenConditionMet, $"{nameof(MonitorConfiguration.TerminateWhenConditionMet)}" },
-                { ShouldFailOnRunDurationExceeded, $"{nameof(MonitorConfiguration.ShouldFailOnRunDurationExceeded)}" },
-                { CooldownWhenConditionMetMinutes, $"{nameof(MonitorConfiguration.CooldownWhenConditionMetMinutes)}" },
-                { SinkType, $"{nameof(MonitorConfiguration.SinkType)}" },
-                { SinkConnection, $"{nameof(MonitorConfiguration.SinkConnection)}" },
+                { DurationToRunMinutes, $"{nameof(PeckrConfiguration.DurationToRunMinutes)}" },
+                { PollingIntervalMilliseconds, $"{nameof(PeckrConfiguration.PollingIntervalMilliseconds)}" },
+                { MonitorType, $"{nameof(PeckrConfiguration.MonitorType)}" },
+                { SourceTakeLimit, $"{nameof(PeckrConfiguration.SourceTakeLimit)}" },
+                { SourcePreviousSpanMinutes, $"{nameof(PeckrConfiguration.SourcePreviousSpanMinutes)}" },
+                { SourceConnection, $"{nameof(PeckrConfiguration.SourceConnection)}" },
+                { SourceFilter, $"{nameof(PeckrConfiguration.SourceFilter)}" },
+                { SourceAppOrResourceId, $"{nameof(PeckrConfiguration.SourceAppOrResourceId)}" },
+                { PrimaryThresholdValue, $"{nameof(PeckrConfiguration.PrimaryThresholdValue)}" },
+                { SecondaryThresholdValue, $"{nameof(PeckrConfiguration.SecondaryThresholdValue)}" },
+                { TerminateWhenConditionMet, $"{nameof(PeckrConfiguration.TerminateWhenConditionMet)}" },
+                { ShouldFailOnRunDurationExceeded, $"{nameof(PeckrConfiguration.ShouldFailOnRunDurationExceeded)}" },
+                { CooldownWhenConditionMetMinutes, $"{nameof(PeckrConfiguration.CooldownWhenConditionMetMinutes)}" },
+                { SinkType, $"{nameof(PeckrConfiguration.SinkType)}" },
+                { SinkConnection, $"{nameof(PeckrConfiguration.SinkConnection)}" },
             };
     }
 }

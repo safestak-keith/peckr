@@ -12,7 +12,7 @@ using static Peckr.Abstractions.PeckrEventSource;
 
 namespace Peckr.Metrics.Sources.Azure
 {
-    public class WadPerfCountersMetricsRetriever : IMonitorDataRetriever<IReadOnlyCollection<Metric>>
+    public class WadPerfCountersMetricsRetriever : IPeckDataRetriever<IReadOnlyCollection<Metric>>
     {
         private static readonly Random Jitter = new Random();
 

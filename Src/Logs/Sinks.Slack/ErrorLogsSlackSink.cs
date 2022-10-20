@@ -13,7 +13,7 @@ using static Peckr.Abstractions.PeckrEventSource;
 
 namespace Peckr.Logs.Sinks.Slack
 {
-    public class ErrorLogsSlackSink : IMonitoringResultSink<IReadOnlyCollection<LogEntry>>
+    public class ErrorLogsSlackSink : IPeckResultSink<IReadOnlyCollection<LogEntry>>
     {
         private static readonly Random Jitter = new Random();
 
@@ -27,8 +27,8 @@ namespace Peckr.Logs.Sinks.Slack
         }
 
         public async ValueTask PushMonitoringResultAsync(
-            MonitoringResult<IReadOnlyCollection<LogEntry>> result,
-            MonitorSettings settings,
+            PeckResult<IReadOnlyCollection<LogEntry>> result,
+            PeckrSettings settings,
             CancellationToken ct)
         {
             var errors = result.Result.Where(r => r.Level <= LogLevel.Error).ToArray();
@@ -55,7 +55,7 @@ namespace Peckr.Logs.Sinks.Slack
             }
         }
 
-        private static SlackMessage GenerateSlackMessage(MonitorSettings settings, LogEntry[] errors)
+        private static SlackMessage GenerateSlackMessage(PeckrSettings settings, LogEntry[] errors)
         {
             const int maxDisplayCount = 5;
             var failuresToDisplay = errors.OrderBy(l => l.Timestamp).Take(maxDisplayCount);

@@ -4,7 +4,7 @@ using Peckr.Abstractions;
 
 namespace Peckr.Metrics.ResultEvaluators
 {
-    public class MetricPercentageThresholdSamplingEvaluator : IMonitoringResultEvaluator<IReadOnlyCollection<Metric>>
+    public class MetricPercentageThresholdSamplingEvaluator : IPeckResultEvaluator<IReadOnlyCollection<Metric>>
     {
         private readonly double _primaryThresholdValue;
         private readonly double _secondaryThresholdValue;

@@ -16,12 +16,12 @@ namespace Peckr.Metrics.UnitTests
     [Collection("UnitTestFixtures")]
     public class InstanceMetricAverageUpperThresholdPollerShould
     {
-        private readonly Mock<IMonitorDataRetriever<IReadOnlyCollection<Metric>>> _mockRetriever;
+        private readonly Mock<IPeckDataRetriever<IReadOnlyCollection<Metric>>> _mockRetriever;
         private readonly InstanceMetricAverageUpperThresholdPoller _poller;
 
         public InstanceMetricAverageUpperThresholdPollerShould()
         {
-            _mockRetriever = new Mock<IMonitorDataRetriever<IReadOnlyCollection<Metric>>>();
+            _mockRetriever = new Mock<IPeckDataRetriever<IReadOnlyCollection<Metric>>>();
             _poller = new InstanceMetricAverageUpperThresholdPoller(_mockRetriever.Object);
         }
 

@@ -32,11 +32,11 @@ namespace Peckr.ConsoleApp
             }
 
             Log.ProgramStarted(settings.MonitorType.ToString(), settings.SourceAppOrResourceId, settings.SinkType.ToString());
-            var monitor = MonitorFactory.CreateMonitor(settings);
+            var peckr = PeckrFactory.CreatePeckr(settings);
             var stopwatch = Stopwatch.StartNew();
             try
             {
-                return (int)await monitor.MonitorAsync(settings, cts);
+                return (int)await peckr.PeckAsync(settings, cts);
             }
             catch (OperationCanceledException)
             {
@@ -55,7 +55,7 @@ namespace Peckr.ConsoleApp
             return (int)ConsoleExitCode.Success;
         }
 
-        private static MonitorSettings TryDeriveSettings(string[] args)
+        private static PeckrSettings TryDeriveSettings(string[] args)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Peckr.ConsoleApp
                     .AddEnvironmentVariables()
                     .AddCommandLine(args, ConsoleArgs.Mappings)
                     .Build()
-                    .Get<MonitorConfiguration>()
+                    .Get<PeckrConfiguration>()
                     .ToMonitorSettings();
             }
             catch (ArgumentException ex)

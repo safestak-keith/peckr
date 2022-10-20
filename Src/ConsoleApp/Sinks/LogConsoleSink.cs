@@ -8,30 +8,30 @@ using Peckr.Logs;
 
 namespace Peckr.ConsoleApp.Sinks
 {
-    public class LogConsoleSink : IMonitoringResultSink<IReadOnlyCollection<LogEntry>>
+    public class LogConsoleSink : IPeckResultSink<IReadOnlyCollection<LogEntry>>
     {
-        private readonly IMonitoringResultSink<IReadOnlyCollection<LogEntry>> _decoratedSink;
+        private readonly IPeckResultSink<IReadOnlyCollection<LogEntry>> _decoratedSink;
 
-        public LogConsoleSink(IMonitoringResultSink<IReadOnlyCollection<LogEntry>> decoratedSink)
+        public LogConsoleSink(IPeckResultSink<IReadOnlyCollection<LogEntry>> decoratedSink)
         {
             _decoratedSink = decoratedSink;
         }
 
         public async ValueTask PushMonitoringResultAsync(
-            MonitoringResult<IReadOnlyCollection<LogEntry>> monitoringResult,
-            MonitorSettings settings, 
+            PeckResult<IReadOnlyCollection<LogEntry>> peckResult,
+            PeckrSettings settings, 
             CancellationToken ct)
         {
-            if (monitoringResult.IsFailure(settings))
+            if (peckResult.IsFailure(settings))
             {
-                OutputLogResults(monitoringResult.Result, Console.Error.WriteLine);
+                OutputLogResults(peckResult.Result, Console.Error.WriteLine);
             }
             else
             {
-                OutputLogResults(monitoringResult.Result, Console.WriteLine);
+                OutputLogResults(peckResult.Result, Console.WriteLine);
             }
 
-            await _decoratedSink.PushMonitoringResultAsync(monitoringResult, settings, ct).ConfigureAwait(false);
+            await _decoratedSink.PushMonitoringResultAsync(peckResult, settings, ct).ConfigureAwait(false);
         }
 
         private static void OutputLogResults(IReadOnlyCollection<LogEntry> results, Action<string> printLine)

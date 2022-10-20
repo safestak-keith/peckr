@@ -4,7 +4,7 @@ using Peckr.Abstractions;
 
 namespace Peckr.Metrics.ResultEvaluators
 {
-    public class MetricSingleUpperThresholdEvaluator : IMonitoringResultEvaluator<IReadOnlyCollection<Metric>>
+    public class MetricSingleUpperThresholdEvaluator : IPeckResultEvaluator<IReadOnlyCollection<Metric>>
     {
         private readonly double _primaryThresholdValue;
 

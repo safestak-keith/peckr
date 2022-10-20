@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Peckr.Abstractions
 {
-    public interface IMonitorDataRetriever<TResult>
+    public interface IPeckDataRetriever<TResult>
     {
         Task<TResult> GetAsync(
             DateTimeOffset start,

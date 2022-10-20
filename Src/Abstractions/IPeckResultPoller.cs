@@ -4,10 +4,10 @@ using System.Threading;
 
 namespace Peckr.Abstractions
 {   
-    public interface IMonitoringResultPoller<T>
+    public interface IPeckResultPoller<T>
     {
-        IAsyncEnumerable<MonitoringResult<T>> PollAsync(
-            MonitorSettings settings,
+        IAsyncEnumerable<PeckResult<T>> PollAsync(
+            PeckrSettings settings,
             [EnumeratorCancellation] CancellationToken ct);
     }
 }

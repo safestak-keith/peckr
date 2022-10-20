@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace Peckr.Abstractions
 {
-    public interface IMonitoringResultSink<T>
+    public interface IPeckResultSink<T>
     {
         ValueTask PushMonitoringResultAsync(
-            MonitoringResult<T> result,
-            MonitorSettings settings,
+            PeckResult<T> result,
+            PeckrSettings settings,
             CancellationToken ct);
     }
 }

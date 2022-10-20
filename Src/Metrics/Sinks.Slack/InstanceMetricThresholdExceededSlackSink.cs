@@ -13,7 +13,7 @@ using static Peckr.Abstractions.PeckrEventSource;
 
 namespace Peckr.Metrics.Sinks.Slack
 {
-    public class InstanceMetricThresholdExceededSlackSink : IMonitoringResultSink<IReadOnlyCollection<Metric>>
+    public class InstanceMetricThresholdExceededSlackSink : IPeckResultSink<IReadOnlyCollection<Metric>>
     {
         private static readonly Random Jitter = new Random();
 
@@ -27,8 +27,8 @@ namespace Peckr.Metrics.Sinks.Slack
         }
 
         public async ValueTask PushMonitoringResultAsync(
-            MonitoringResult<IReadOnlyCollection<Metric>> result,
-            MonitorSettings settings,
+            PeckResult<IReadOnlyCollection<Metric>> result,
+            PeckrSettings settings,
             CancellationToken ct)
         {
             var failures = result.Result
@@ -58,7 +58,7 @@ namespace Peckr.Metrics.Sinks.Slack
             }
         }
 
-        private static SlackMessage GenerateSlackMessage(MonitorSettings settings, Metric[] failures)
+        private static SlackMessage GenerateSlackMessage(PeckrSettings settings, Metric[] failures)
         {
             const int maxDisplayCount = 50;
             var failuresToDisplay = failures.Take(maxDisplayCount).ToArray();
